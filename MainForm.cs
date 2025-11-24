@@ -70,6 +70,9 @@ namespace DATAFILTER
             // Enable drag & drop
             inputTextBox.AllowDrop = true;
 
+            // Thiết lập sự kiện placeholder
+            SetupPlaceholderEvents();
+
             // Tạo context menu
             CreateContextMenus();
         }
@@ -86,6 +89,9 @@ namespace DATAFILTER
             inputTextBox.DragEnter += InputTextBox_DragEnter;
             inputTextBox.DragDrop += InputTextBox_DragDrop;
 
+            inputTextBox.MouseDown += InputTextBox_MouseDown;
+            resultTextBox.MouseDown += ResultTextBox_MouseDown;
+
             // ✅ THÊM EVENT CHO STATUS LABEL
             statusLabel.Click += StatusLabel_Click;
         }
@@ -94,6 +100,93 @@ namespace DATAFILTER
         {
             filterWorker.DoWork += FilterWorker_DoWork;
             filterWorker.RunWorkerCompleted += FilterWorker_RunWorkerCompleted;
+        }
+        #endregion
+
+        #region SỰ KIỆN CHO PLACEHOLDER
+        private void SetupPlaceholderEvents()
+        {
+            // Sự kiện cho inputTextBox
+            inputTextBox.GotFocus += (sender, e) =>
+            {
+                if (isInputPlaceholder)
+                {
+                    inputTextBox.Clear();
+                    inputTextBox.ForeColor = Color.Black;
+                    inputTextBox.SelectAll();
+                    inputTextBox.SelectionFont = new Font(inputTextBox.Font, FontStyle.Regular);
+                    inputTextBox.DeselectAll();
+                    isInputPlaceholder = false;
+                }
+            };
+
+            inputTextBox.LostFocus += (sender, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(inputTextBox.Text))
+                {
+                    inputTextBox.Text = "📝 Paste dữ liệu vào đây hoặc kéo thả file...";
+                    inputTextBox.ForeColor = Color.Gray;
+                    inputTextBox.SelectAll();
+                    inputTextBox.SelectionFont = new Font(inputTextBox.Font, FontStyle.Italic);
+                    inputTextBox.DeselectAll();
+                    isInputPlaceholder = true;
+                }
+            };
+
+            // Sự kiện cho resultTextBox
+            resultTextBox.GotFocus += (sender, e) =>
+            {
+                if (isResultPlaceholder)
+                {
+                    resultTextBox.Clear();
+                    resultTextBox.ForeColor = Color.Black;
+                    resultTextBox.SelectAll();
+                    resultTextBox.SelectionFont = new Font(resultTextBox.Font, FontStyle.Regular);
+                    resultTextBox.DeselectAll();
+                    isResultPlaceholder = false;
+                }
+            };
+
+            resultTextBox.LostFocus += (sender, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(resultTextBox.Text))
+                {
+                    resultTextBox.Text = "⏳ Kết quả sẽ hiển thị ở đây sau khi lọc...";
+                    resultTextBox.ForeColor = Color.Gray;
+                    resultTextBox.SelectAll();
+                    resultTextBox.SelectionFont = new Font(resultTextBox.Font, FontStyle.Italic);
+                    resultTextBox.DeselectAll();
+                    isResultPlaceholder = true;
+                }
+            };
+        }
+        #endregion
+
+        #region XỬ LÝ MOUSEDOWN ĐỂ XÓA PLACEHOLDER
+        private void InputTextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (isInputPlaceholder)
+            {
+                inputTextBox.Clear();
+                inputTextBox.ForeColor = Color.Black;
+                inputTextBox.SelectAll();
+                inputTextBox.SelectionFont = new Font(inputTextBox.Font, FontStyle.Regular);
+                inputTextBox.DeselectAll();
+                isInputPlaceholder = false;
+            }
+        }
+
+        private void ResultTextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (isResultPlaceholder)
+            {
+                resultTextBox.Clear();
+                resultTextBox.ForeColor = Color.Black;
+                resultTextBox.SelectAll();
+                resultTextBox.SelectionFont = new Font(resultTextBox.Font, FontStyle.Regular);
+                resultTextBox.DeselectAll();
+                isResultPlaceholder = false;
+            }
         }
         #endregion
 
@@ -314,10 +407,11 @@ namespace DATAFILTER
                     textBox.SelectionFont = new Font(textBox.Font, FontStyle.Regular);
                     textBox.DeselectAll();
 
+                    // Cập nhật trạng thái placeholder
                     if (textBox == inputTextBox)
-                        isInputPlaceholder = false;
-                    else
-                        isResultPlaceholder = false;
+                        isInputPlaceholder = true;
+                    else if (textBox == resultTextBox)
+                        isResultPlaceholder = true;
                 }
             };
 

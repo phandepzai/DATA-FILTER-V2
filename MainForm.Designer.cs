@@ -118,12 +118,12 @@ namespace DATAFILTER
             // 
             this.inputCountLabel.AutoSize = true;
             this.inputCountLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.inputCountLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputCountLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputCountLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(180)))));
-            this.inputCountLabel.Location = new System.Drawing.Point(343, 5);
+            this.inputCountLabel.Location = new System.Drawing.Point(323, 5);
             this.inputCountLabel.Name = "inputCountLabel";
             this.inputCountLabel.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.inputCountLabel.Size = new System.Drawing.Size(115, 23);
+            this.inputCountLabel.Size = new System.Drawing.Size(135, 25);
             this.inputCountLabel.TabIndex = 1;
             this.inputCountLabel.Text = "📊 Số lượng: 0 dòng";
             this.inputCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -183,12 +183,12 @@ namespace DATAFILTER
             // 
             this.resultCountLabel.AutoSize = true;
             this.resultCountLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.resultCountLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultCountLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resultCountLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(150)))), ((int)(((byte)(80)))));
-            this.resultCountLabel.Location = new System.Drawing.Point(351, 5);
+            this.resultCountLabel.Location = new System.Drawing.Point(330, 5);
             this.resultCountLabel.Name = "resultCountLabel";
             this.resultCountLabel.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.resultCountLabel.Size = new System.Drawing.Size(107, 23);
+            this.resultCountLabel.Size = new System.Drawing.Size(128, 25);
             this.resultCountLabel.TabIndex = 1;
             this.resultCountLabel.Text = "✅ Kết quả: 0 dòng";
             this.resultCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
